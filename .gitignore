@@ -3,6 +3,7 @@
 
 # data
 /videos
+/public/video.mp4
 
 # testing
 /coverage
