@@ -4,6 +4,7 @@ const {
 	SET_ONSET_DATA,
 	SET_ONSET_DETECTION_RUNNING,
 	SET_ONSET_GRAPH_SCALE,
+	SET_CANVAS_COLOR,
 	SET_THRESHOLD,
 	TOGGLE_AUTO_THRESHOLD_IS_ACTIVE,
 	TOGGLE_ONSET_DETECTION_RUNNING
@@ -71,6 +72,7 @@ const reducer = (state: IOnsetState = initialState, action: any = {}) => {
 				...state,
 				userThreshold: action.threshold
 			};
+		
 		default:
 			return state;
 	}

@@ -4,6 +4,7 @@ import ActionTypes from './actionTypes';
 const { 
 	SET_SETTINGS_VISIBILITY,
 	SET_CANVAS_COLOR,
+	SET_VIDEO_PROGRESS,
 	TOGGLE_SETTINGS_VISIBILITY,
 	TOGGLE_AUTO_THRESHOLD_IS_ACTIVE,
 	TOGGLE_ONSET_DETECTION_RUNNING,
@@ -21,6 +22,11 @@ export const setSettingsVisibility = (settingsAreVisible: boolean) => ({
 export const setCanvasColor = (color: string) => ({
 	color,
 	type: SET_CANVAS_COLOR,
+});
+
+export const setVideoProgress = (progress: number) => ({
+	progress,
+	type: SET_VIDEO_PROGRESS,
 });
 
 export const toggleSettingsVisibility = () => ({

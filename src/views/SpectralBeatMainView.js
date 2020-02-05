@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import ReactPlayer from 'react-player';
 
 import SettingsOverlay from '../components/SettingsOverlay';
 import OnsetDetectionController from '../components/OnsetDetectionController';
@@ -11,11 +12,13 @@ import { toggleFullScreen } from '../lib/helpers';
 const propTypes = {
     setSettingsVisibility: PropTypes.func.isRequired,
     settingsAreVisible: PropTypes.bool.isRequired,
+    videoTime: PropTypes.number.isRequired,
 };
 
-const mapStateToProps = ({ canvas, settings }) => ({
+const mapStateToProps = ({ video, canvas, settings }) => ({
     backgroundColor: canvas.currentColor,
     settingsAreVisible: settings.settingsAreVisible,
+    videoTime: video.progress,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -24,7 +27,24 @@ const mapDispatchToProps = dispatch => ({
     },
 });
 
+
 class SpectralBeatMainView extends Component {
+    // tslint:disable:no-console
+    constructor(props) {
+        super(props);
+        this.player = React.createRef();
+    }
+
+    componentWillUpdate(prevState, nextState) {
+        // console.log(prevState.progress)
+        this.player.current.seekTo(prevState.videoTime)
+    }
+
+    togglePlayPause() {
+        // tslint:disable:no-console
+        this.player.current.seekTo(Math.random());
+    }
+
     render() {
         const { settingsAreVisible, backgroundColor } =  this.props;
         return (
@@ -36,6 +56,18 @@ class SpectralBeatMainView extends Component {
                         src={'fullscreen.png'}
                         style={styles.fullscreenButton}
                         onClick={toggleFullScreen}
+                    />
+                </div>
+                <div style={styles.videoContainer}>
+                    <ReactPlayer 
+                        ref={this.player}
+                        url='video.mp4' 
+                        width='100%'
+                        height='100%'
+                        playing 
+                        muted 
+                        loop
+                        onClick={() => this.togglePlayPause()}
                     />
                 </div>
 
@@ -87,6 +119,16 @@ const styles = {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'flex-end',
+    },
+    videoContainer: {
+        display: 'flex',
+        // flexDirection: 'column',
+        // height: '100%',
+        // width: '100%'
+
+        height: '200%',
+        margin: 'auto',
+        width: '200%',
     },
 }
 

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import ReactPlayer from 'react-player'
 
 import OnsetDetection from '../lib/OnsetDetection';
 import { getRandomColor } from '../lib/helpers';
@@ -102,14 +101,11 @@ class OnsetDetectionController extends Component {
         } = this.props;
 
         return (
-            <div>
-                <ReactPlayer url='video.mp4' playing muted />
-                <ControlPanel
-                    onClickStartStop={(isRunning) => { setOnsetDetectionRunning(isRunning); }}
-                    onClickSettings={toggleSettingsVisibility}
-                    isRunning={onsetDetectionIsRunning}
-                />
-            </div>
+            <ControlPanel
+                onClickStartStop={(isRunning) => { setOnsetDetectionRunning(isRunning); }}
+                onClickSettings={toggleSettingsVisibility}
+                isRunning={onsetDetectionIsRunning}
+            />
         );
     }
 }
