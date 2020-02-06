@@ -126,9 +126,9 @@ const styles = {
         // height: '100%',
         // width: '100%'
 
-        height: '200%',
+        height: '100%',
         margin: 'auto',
-        width: '200%',
+        width: '100%',
     },
 }
 
