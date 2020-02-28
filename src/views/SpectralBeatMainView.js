@@ -12,13 +12,11 @@ import { toggleFullScreen } from '../lib/helpers';
 const propTypes = {
     setSettingsVisibility: PropTypes.func.isRequired,
     settingsAreVisible: PropTypes.bool.isRequired,
-    videoTime: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = ({ video, canvas, settings }) => ({
     backgroundColor: canvas.currentColor,
     settingsAreVisible: settings.settingsAreVisible,
-    videoTime: video.progress,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -29,7 +27,7 @@ const mapDispatchToProps = dispatch => ({
 
 
 class SpectralBeatMainView extends Component {
-    
+    // tslint:disable:no-console
     constructor(props) {
         super(props);
         this.player = React.createRef();
