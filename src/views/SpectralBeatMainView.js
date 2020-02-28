@@ -29,15 +29,14 @@ const mapDispatchToProps = dispatch => ({
 
 
 class SpectralBeatMainView extends Component {
-    // tslint:disable:no-console
+    
     constructor(props) {
         super(props);
         this.player = React.createRef();
     }
 
     componentWillUpdate(prevState, nextState) {
-        // console.log(prevState.progress)
-        this.player.current.seekTo(prevState.videoTime)
+        this.player.current.seekTo(Math.random())
     }
 
     jumpToRandomTimestamp() {
