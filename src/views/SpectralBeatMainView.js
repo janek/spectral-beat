@@ -28,15 +28,14 @@ const mapDispatchToProps = dispatch => ({
 
 class SpectralBeatMainView extends Component {
     
-    // tslint:disable:no-console
     constructor(props) {
         super(props);
         this.jumpNumber = 0;
-        this.playerOne = React.createRef();
-        this.playerTwo = React.createRef();
-        this.playerThree = React.createRef();
-        
-        this.players = [this.playerOne, this.playerTwo, this.playerThree];
+        // XXX: Using refs+zindex for the functionality of alternating between videos is a hack
+        // a good solution would possibly use Redux and "elevate state"
+        // 
+        this.videoContainers = [React.createRef(), React.createRef(), React.createRef()];
+        this.players =  [React.createRef(), React.createRef(), React.createRef()];
     }
 
     componentWillUpdate(prevState, nextState) {
@@ -44,13 +43,14 @@ class SpectralBeatMainView extends Component {
     }
 
     jumpToRandomTimestamp() {
-        const player = this.players[this.jumpNumber%3]
-        player.current.seekTo(Math.random());
+        const i = this.jumpNumber%3
+        this.players[i].current.seekTo(Math.random());
+        this.videoContainers[i].current.style.zIndex = this.jumpNumber
         this.jumpNumber += 1 
     }
 
     render() {
-        const { settingsAreVisible, backgroundColor } =  this.props;
+        const { settingsAreVisible, backgroundColor } = this.props;
         return (
             <div 
                 style={{ backgroundColor, ...styles.main }}
@@ -62,9 +62,9 @@ class SpectralBeatMainView extends Component {
                         onClick={toggleFullScreen}
                     />
                 </div>
-                <div style={styles.videoContainer}>
+                <div style={styles.videoContainer} ref={this.videoContainers[0]}>
                     <ReactPlayer 
-                        ref={this.playerOne}
+                        ref={this.players[0]}
                         url='video.mp4' 
                         width='100%'
                         height='100%'
@@ -74,9 +74,9 @@ class SpectralBeatMainView extends Component {
                         onClick={() => this.jumpToRandomTimestamp()}
                     />
                 </div>
-                <div style={styles.videoContainer}>
+                <div style={styles.videoContainer} ref={this.videoContainers[1]}>
                     <ReactPlayer 
-                        ref={this.playerTwo}
+                        ref={this.players[1]}
                         url='video2.mp4' 
                         width='100%'
                         height='100%'
@@ -86,9 +86,9 @@ class SpectralBeatMainView extends Component {
                         onClick={() => this.jumpToRandomTimestamp()}
                     />
                 </div>
-                <div style={styles.videoContainer}>
+                <div style={styles.videoContainer} ref={this.videoContainers[2]}>
                     <ReactPlayer 
-                        ref={this.playerThree}
+                        ref={this.players[2]}
                         url='video3.mp4' 
                         width='100%'
                         height='100%'
@@ -122,6 +122,7 @@ const styles = {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'flex-start',
+        zIndex: 1000000, //XXX: this is a consequence of using zIndex to cycle videos 
     },
     fullscreenButton: {
         height: "3em",
@@ -151,12 +152,9 @@ const styles = {
     },
     videoContainer: {
         display: 'flex',
-        // flexDirection: 'column',
-        // height: '100%',
-        // width: '100%'
-
         height: '100%',
         margin: 'auto',
+        position: 'absolute',
         width: '100%',
     },
 }
