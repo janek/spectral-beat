@@ -40,8 +40,7 @@ class SpectralBeatMainView extends Component {
         this.player.current.seekTo(prevState.videoTime)
     }
 
-    togglePlayPause() {
-        // tslint:disable:no-console
+    jumpToRandomTimestamp() {
         this.player.current.seekTo(Math.random());
     }
 
@@ -67,7 +66,7 @@ class SpectralBeatMainView extends Component {
                         playing 
                         muted 
                         loop
-                        onClick={() => this.togglePlayPause()}
+                        onClick={() => this.jumpToRandomTimestamp()}
                     />
                 </div>
 
