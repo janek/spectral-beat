@@ -27,18 +27,26 @@ const mapDispatchToProps = dispatch => ({
 
 
 class SpectralBeatMainView extends Component {
+    
     // tslint:disable:no-console
     constructor(props) {
         super(props);
-        this.player = React.createRef();
+        this.jumpNumber = 0;
+        this.playerOne = React.createRef();
+        this.playerTwo = React.createRef();
+        this.playerThree = React.createRef();
+        
+        this.players = [this.playerOne, this.playerTwo, this.playerThree];
     }
 
     componentWillUpdate(prevState, nextState) {
-        this.player.current.seekTo(Math.random())
+        this.jumpToRandomTimestamp()
     }
 
     jumpToRandomTimestamp() {
-        this.player.current.seekTo(Math.random());
+        const player = this.players[this.jumpNumber%3]
+        player.current.seekTo(Math.random());
+        this.jumpNumber += 1 
     }
 
     render() {
@@ -56,7 +64,7 @@ class SpectralBeatMainView extends Component {
                 </div>
                 <div style={styles.videoContainer}>
                     <ReactPlayer 
-                        ref={this.player}
+                        ref={this.playerOne}
                         url='video.mp4' 
                         width='100%'
                         height='100%'
@@ -66,6 +74,31 @@ class SpectralBeatMainView extends Component {
                         onClick={() => this.jumpToRandomTimestamp()}
                     />
                 </div>
+                <div style={styles.videoContainer}>
+                    <ReactPlayer 
+                        ref={this.playerTwo}
+                        url='video2.mp4' 
+                        width='100%'
+                        height='100%'
+                        playing 
+                        muted 
+                        loop
+                        onClick={() => this.jumpToRandomTimestamp()}
+                    />
+                </div>
+                <div style={styles.videoContainer}>
+                    <ReactPlayer 
+                        ref={this.playerThree}
+                        url='video3.mp4' 
+                        width='100%'
+                        height='100%'
+                        playing 
+                        muted 
+                        loop
+                        onClick={() => this.jumpToRandomTimestamp()}
+                    />
+                </div>
+
 
                 <div style={styles.settingsContainer} >
                     {settingsAreVisible
