@@ -31,6 +31,7 @@ class SpectralBeatMainView extends Component {
     constructor(props) {
         super(props);
         this.jumpNumber = 0;
+        this.videoFileName = 'video.mp4';
         // XXX: Using refs+zindex for the functionality of alternating between videos is a hack
         // a good solution would possibly use Redux and "elevate state"
         // 
@@ -65,7 +66,7 @@ class SpectralBeatMainView extends Component {
                 <div style={styles.videoContainer} ref={this.videoContainers[0]}>
                     <ReactPlayer 
                         ref={this.players[0]}
-                        url='video.mp4' 
+                        url={this.videoFileName}
                         width='100%'
                         height='100%'
                         playing 
@@ -77,7 +78,7 @@ class SpectralBeatMainView extends Component {
                 <div style={styles.videoContainer} ref={this.videoContainers[1]}>
                     <ReactPlayer 
                         ref={this.players[1]}
-                        url='video.mp4' 
+                        url={this.videoFileName}
                         width='100%'
                         height='100%'
                         playing 
@@ -89,7 +90,7 @@ class SpectralBeatMainView extends Component {
                 <div style={styles.videoContainer} ref={this.videoContainers[2]}>
                     <ReactPlayer 
                         ref={this.players[2]}
-                        url='video.mp4' 
+                        url={this.videoFileName}
                         width='100%'
                         height='100%'
                         playing 
