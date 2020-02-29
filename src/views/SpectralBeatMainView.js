@@ -77,7 +77,7 @@ class SpectralBeatMainView extends Component {
                 <div style={styles.videoContainer} ref={this.videoContainers[1]}>
                     <ReactPlayer 
                         ref={this.players[1]}
-                        url='video2.mp4' 
+                        url='video.mp4' 
                         width='100%'
                         height='100%'
                         playing 
@@ -89,7 +89,7 @@ class SpectralBeatMainView extends Component {
                 <div style={styles.videoContainer} ref={this.videoContainers[2]}>
                     <ReactPlayer 
                         ref={this.players[2]}
-                        url='video3.mp4' 
+                        url='video.mp4' 
                         width='100%'
                         height='100%'
                         playing 
