@@ -2,7 +2,7 @@
 /node_modules
 
 # data
-/videos
+/public/videos
 /public/video.mp4
 
 # testing
